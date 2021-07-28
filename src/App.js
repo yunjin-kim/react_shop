@@ -39,7 +39,7 @@ function App() {
         <div className="col-md-4">
           <img src="https://www.osulloc.com/upload/kr/ko/adminImage/GD/EP/20200716171557754KL.png?quality=80" />
           <h4>찬물녹차 20입</h4>
-          <p>8,600원</p>
+          <p>7,600원</p>
         </div>
       </div>
     </div>
