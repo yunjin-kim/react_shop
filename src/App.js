@@ -7,6 +7,7 @@ import tealist from './data';
 
 function App() {
   let [tea, setTea] = useState(tealist);
+  
   return (
     <div className="App">
 
@@ -29,7 +30,12 @@ function App() {
 
     <div className="container">
       <div className="row">
-        <Product />
+        {
+          tea.map((a,i)=>{
+            return <Product tea={tea[i]} i={i}/>
+          })
+        }
+
       </div>
     </div>
 
@@ -37,16 +43,15 @@ function App() {
   );
 }
 
-function Product(){
-  let [tea, setTea] = useState(tealist);
+function Product(props){
   return(
     <div className="col-md-4">
-    <img src={tea[0].img} />
-    <h4>{tea[0].title}</h4>
-    <p>{tea[0].price}원</p>
+    {/* <img src={'../img/'+(props.i + 1)+'.png'}width='100%' /> */}
+    <img src={props.tea.img} width='100%' />
+    <h4>{props.tea.title}</h4>
+    <p>{props.tea.price}원</p>
     </div>
   )
-    
 }
 
 
