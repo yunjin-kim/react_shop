@@ -19,7 +19,7 @@ function App() {
         <Container>
         <Navbar.Brand ><Link to="/">오설록</Link></Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link ><Link to="/detail">녹차</Link></Nav.Link>
+          <Nav.Link ><Link to="/detail/">녹차</Link></Nav.Link>
           <Nav.Link >발효차</Nav.Link>
           <Nav.Link >홍차</Nav.Link>
         </Nav>
@@ -42,15 +42,12 @@ function App() {
       </div>
     </Route>
 
-    <Route path="/detail">
-      <Detail></Detail>
+    <Route path="/detail/:id">
+      <Detail tea={tea} />
     </Route>
     {/* <Route path="/aa" component={Modal}></Route> */}
 
-    <Route path="/:id">
-          <div>기리보이</div>
-    </Route>
-
+ 
 
       
     </Switch>
