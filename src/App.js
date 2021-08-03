@@ -19,9 +19,9 @@ function App() {
         <Container>
         <Navbar.Brand ><Link to="/">오설록</Link></Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link ><Link to="/detail/0">홍차</Link></Nav.Link>
-          <Nav.Link><Link to="/detail/1">발효차</Link></Nav.Link>
-          <Nav.Link><Link to="/detail/2">녹차</Link></Nav.Link>
+          <Nav.Link as={Link} to="/detail/0">홍차</Nav.Link>
+          <Nav.Link as={Link} to="/detail/1">발효차</Nav.Link>
+          <Nav.Link as={Link} to="/detail/2">녹차</Nav.Link>
         </Nav>
         </Container>
       </Navbar>
