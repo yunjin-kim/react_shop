@@ -3,6 +3,8 @@ import { Navbar,Container,Nav } from 'react-bootstrap';
 import './App.css';
 import tealist from './data';
 import Detail from './Detail';
+import axios from 'axios';
+
 import { Link, Route, Switch } from 'react-router-dom';
 
 function App() {
@@ -40,6 +42,19 @@ function App() {
           }
         </div>
       </div>
+      <button className="btn btn-primary" onClick={()=>{
+
+        axios.post('', {id: '', pw: 1})
+
+        axios.get('https://codingapple1.github.io/shop/data2.json')
+        .then((result)=>{
+          setTea([...tea, ...result.data])
+        })
+        .catch(console.log)
+      }}>더보기</button>
+
+        
+
     </Route>
 
     <Route path="/detail/:id">
@@ -47,7 +62,6 @@ function App() {
     </Route>
     {/* <Route path="/aa" component={Modal}></Route> */}
 
- 
 
       
     </Switch>
