@@ -65,12 +65,21 @@ function Detail(props){
         <div className="col-md-6 mt-4">
         <h4 className="pt-5">{findProduct.title}</h4>
         <p>{findProduct.price}원</p>
-        <button type="button" className="btn btn-primary">구매하기</button>
+
+        <Stockinfo stock={props.stock}></Stockinfo>
+
+        <button type="button" className="btn btn-primary" onClick={()=>{props.setStock()}}>구매하기</button>
         <button type="button" className="btn btn-primary" onClick={()=>{
           histroy.goBack();
         }}>뒤로가기</button>
         </div>
     </>
+  )
+}
+
+function Stockinfo(props){
+  return(
+    <p>재고: {props.stock[0]}</p>
   )
 }
 

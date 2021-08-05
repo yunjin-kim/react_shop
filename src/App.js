@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navbar,Container,Nav } from 'react-bootstrap';
 import './App.css';
 import tealist from './data';
@@ -9,6 +9,17 @@ import { Link, Route, Switch } from 'react-router-dom';
 
 function App() {
   let [tea, setTea] = useState(tealist);
+  let [stock, setStock] = useState([10, 11, 12]);
+  let [more, setMore] = useState(true);
+
+  useEffect(()=>{
+    console.log(tea)
+    tea.forEach((tea)=>{
+      if(tea.id === 5){
+        setMore(false)
+      }
+    })
+  },[tea])
   
   return (
     <div className="App">
@@ -42,23 +53,28 @@ function App() {
           }
         </div>
       </div>
-      <button className="btn btn-primary" onClick={()=>{
-
-        axios.post('', {id: '', pw: 1})
-
-        axios.get('https://codingapple1.github.io/shop/data2.json')
-        .then((result)=>{
-          setTea([...tea, ...result.data])
-        })
-        .catch(console.log)
-      }}>더보기</button>
+      
+      {
+        more === true
+        ? (
+          <button className="btn btn-primary" onClick={()=>{
+            axios.get('https://raw.githubusercontent.com/yunjin-kim/yunjin-kim/main/data2.json')
+            .then((result)=>{
+              setTea([...tea, ...result.data])
+            })
+            .catch(console.log)
+            }}>더보기
+          </button>)
+        : null
+      }
+      
 
         
 
     </Route>
 
     <Route path="/detail/:id">
-      <Detail tea={tea} />
+      <Detail tea={tea} stock={stock} setStock={setStock} />
     </Route>
     {/* <Route path="/aa" component={Modal}></Route> */}
 
