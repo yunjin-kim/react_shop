@@ -6,7 +6,7 @@ import axios from 'axios';
 import tealist from './data';
 import { Link, Route, Switch } from 'react-router-dom';
 //같은 변수값을 공유할 범위 생성
-let stockContext =React.createContext();
+export let stockContext =React.createContext();
 
 function App() {
   let [tea, setTea] = useState(tealist);
@@ -90,7 +90,9 @@ function App() {
     </Route>
 
     <Route path="/detail/:id">
+        <stockContext.Provider value={stock}>
       <Detail tea={tea} stock={stock} setStock={setStock} />
+        </stockContext.Provider>
     </Route>
     {/* <Route path="/aa" component={Modal}></Route> */}
 

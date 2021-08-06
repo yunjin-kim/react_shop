@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Navbar,Container,Nav } from 'react-bootstrap';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import './Detail.scss';
+import {stockContext} from './App'
 
 let Box = styled.div`
   padding: 20px
@@ -16,6 +17,7 @@ let Title = styled.p`
 function Detail(props){
   let [alert, setAlert] = useState(true);
   let [inputData, setInputData] = useState('');
+  let stock = useContext(stockContext);
 
   useEffect(()=>{
     let alertTimer = setTimeout(()=>{setAlert(false)},2000);
