@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Navbar,Container,Nav } from 'react-bootstrap';
 import './App.css';
-import tealist from './data';
 import Detail from './Detail';
 import axios from 'axios';
-
+import tealist from './data';
 import { Link, Route, Switch } from 'react-router-dom';
+//같은 변수값을 공유할 범위 생성
+let stockContext =React.createContext();
 
 function App() {
   let [tea, setTea] = useState(tealist);
@@ -45,14 +46,19 @@ function App() {
           유기농 제주 차밭에서 자란 우리 녹차 발효차 라인입니다
         </p>
       </div>
+
       <div className="container">
+        <stockContext.Provider value={stock}>
         <div className="row">
           {
             tea.map((a,i)=>{
-              return <Product tea={tea[i]} i={i}/>
+              return <Product key={a+i} tea={tea[i]} i={i}/>
             })
           }
         </div>
+
+        </stockContext.Provider>
+
       </div>
       
       {
@@ -88,8 +94,6 @@ function App() {
     </Route>
     {/* <Route path="/aa" component={Modal}></Route> */}
 
-
-      
     </Switch>
 
     </div>
@@ -97,12 +101,17 @@ function App() {
 }
 
 function Product(props){
+
+  let stock = useContext(stockContext);
+
   return(
     <div className="col-md-4">
     {/* <img src={'../img/'+(props.i + 1)+'.png'}width='100%' /> */}
-    <img src={props.tea.img} width='100%' />
+    <img src={props.tea.img} width='100%' alt="tea"/>
     <h4>{props.tea.title}</h4>
     <p>{props.tea.price}원</p>
+    {stock[props.i]}
+    <Test></Test>
     </div>
   )
 }
@@ -115,5 +124,9 @@ function MoreErrBox(){
   )
 }
 
+function Test(){
+  return <p>재고</p>
+}
 
-export default App;
+
+export default  App;

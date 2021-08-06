@@ -26,7 +26,7 @@ function Detail(props){
 
   let { id } = useParams();
   let findProduct = props.tea.find(function(tea){
-    return tea.id == id
+    return tea.id === id
   })
   let histroy = useHistory();
   
