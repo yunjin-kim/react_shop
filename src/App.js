@@ -11,6 +11,7 @@ function App() {
   let [tea, setTea] = useState(tealist);
   let [stock, setStock] = useState([10, 11, 12]);
   let [more, setMore] = useState(true);
+  let [moreErr, setMoreErr] = useState(true);
 
   useEffect(()=>{
     console.log(tea)
@@ -62,10 +63,19 @@ function App() {
             .then((result)=>{
               setTea([...tea, ...result.data])
             })
-            .catch(console.log)
+            .catch(()=>{
+              console.log();
+              setMoreErr(false);
+            })
             }}>더보기
           </button>)
         : null
+      } 
+
+      {
+        moreErr === true
+        ? null
+        : <MoreErrBox />
       }
       
 
@@ -93,6 +103,14 @@ function Product(props){
     <img src={props.tea.img} width='100%' />
     <h4>{props.tea.title}</h4>
     <p>{props.tea.price}원</p>
+    </div>
+  )
+}
+
+function MoreErrBox(){
+  return(
+    <div className="my_alert_yellow" >
+      <p>새로고침 한번 해주세요</p>
     </div>
   )
 }
