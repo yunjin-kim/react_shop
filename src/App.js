@@ -83,9 +83,6 @@ function App() {
         ? null
         : <MoreErrBox />
       }
-      
-
-        
 
     </Route>
 
