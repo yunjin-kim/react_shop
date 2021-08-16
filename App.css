@@ -1,0 +1,24 @@
+.App {
+  text-align: center;
+}
+.me-auto {
+  width: 80vw;
+  justify-content: space-around;
+}
+.d-block {
+  height: 60vh;
+  object-fit: cover;
+}
+.morePouBtn {
+  margin-top: 10vh;
+  min-width: 14vw;
+  min-height: 6vh;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+.onlyToday {
+  width: 100%;
+  height: 50vh;
+  background-color: #edece0;
+  margin-top: 20vh;
+}
