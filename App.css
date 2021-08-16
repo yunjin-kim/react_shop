@@ -22,3 +22,10 @@
   background-color: #edece0;
   margin-top: 20vh;
 }
+.trans-enter {
+  opacity: 0;
+}
+.trans-enter-active {
+  opacity: 1;
+  transition: all 500ms;
+}

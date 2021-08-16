@@ -3,8 +3,10 @@ import './App.css';
 import {Navbar, Container, Nav, NavDropdown,Carousel, Button} from 'react-bootstrap';
 import TeaData from './data';
 import teashop from './teashop';
+import Cart from './Cart';
 import axios from 'axios';
 import BarComponent from './Navbar';
+import { CSSTransition } from 'react-transition-group';
 
 import { Link, Route, Switch } from 'react-router-dom';
 
@@ -13,6 +15,7 @@ function App() {
     let [tea, setTea] = useState(TeaData);
     let [more, setMore] = useState(true);
     let [pushTab, setPushTab] = useState(0);
+    let [switchEvent, setSwitchEvent] = useState(false);
 
     useEffect(()=>{
       tea.forEach((tea)=>{
@@ -92,44 +95,59 @@ function App() {
               : null
             }
           
+            <Nav className="mt-5" variant="tabs" defaultActiveKey="link-0">
+              <Nav.Item>
+                <Nav.Link eventKey="link-0" onClick={()=>{setPushTab(0); setSwitchEvent(false);}}>Option1</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="link-1" onClick={()=>{setPushTab(1); setSwitchEvent(false);}}>Option2</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="link-2" onClick={()=>{setPushTab(2); setSwitchEvent(false);}}>Option3</Nav.Link>
+              </Nav.Item>
+            </Nav>
+
+          <CSSTransition in={switchEvent} classNames="trans" timeout={1000}>
+            <TabContent pushTab={pushTab} setSwitchEvent={setSwitchEvent} />
+          </CSSTransition>
+          
         </Route>
 
         <Route path="/teashop">
           <BarComponent></BarComponent>
         </Route>
 
+        <Route path="/cart">
+            <Cart></Cart>
+        </Route>
+
+
         </Switch>
         
-        
-        
-
         <div className="onlyToday">
 
         </div>
 
-        <Nav className="mt-5" variant="tabs" defaultActiveKey="link-0">
-          <Nav.Item>
-            <Nav.Link eventKey="link-0" onClick={()=>{setPushTab(0)}}>Option1</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="link-1" onClick={()=>{setPushTab(1)}}>Option2</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-          </Nav.Item>
-        </Nav>
+        
 
-        <TabContent pushTab={pushTab} />
-
+       
     </div>
   </>
     )
 }
 
 function TabContent(props){
+  
+  useEffect(()=>{
+    props.setSwitchEvent(true);
+  })
+
   if(props.pushTab === 0){
     return <div>0번째 내용입니다</div>
   }else if(props.pushTab === 1){
     return <div>1번째 내용입니다</div>
+  }else if(props.pushTab === 2){
+    return <div>2번째 내용입니다</div>
   }
 }
 
