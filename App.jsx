@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import {Navbar, Container, Nav, NavDropdown,Carousel, Button} from 'react-bootstrap';
+import {Nav,Carousel, Button} from 'react-bootstrap';
 import TeaData from './data';
-import teashop from './teashop';
 import Cart from './Cart';
 import axios from 'axios';
 import BarComponent from './Navbar';
@@ -26,113 +25,145 @@ function App() {
     })
 
     return (
-        <> 
+      <> 
         <div className = "App" > 
 
-        <Switch>
+            <Switch>
 
+            <Route exact path="/">
+              <BarComponent></BarComponent>
 
-        <Route exact path="/">
-          <BarComponent></BarComponent>
+              <Carousel>
+                <Carousel.Item>
+                    <img
+                        className="d-block w-100"
+                        src="src/img/carousel1.jpg"
+                        alt="First slide"/>
+                    <Carousel.Caption>
+                        <h3>First slide label</h3>
+                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item>
+                    <img
+                        className="d-block w-100"
+                        src="src/img/carousel2.jpg"
+                        alt="Second slide"/>
 
-          <Carousel>
-            <Carousel.Item>
-                <img
-                    className="d-block w-100"
-                    src="src/img/carousel1.jpg"
-                    alt="First slide"/>
-                <Carousel.Caption>
-                    <h3>First slide label</h3>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-                <img
-                    className="d-block w-100"
-                    src="src/img/carousel2.jpg"
-                    alt="Second slide"/>
+                    <Carousel.Caption>
+                        <h3>Second slide label</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item>
+                    <img
+                        className="d-block w-100"
+                        src="src/img/carousel3.jpg"
+                        alt="Third slide"/>
 
-                <Carousel.Caption>
-                    <h3>Second slide label</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-                <img
-                    className="d-block w-100"
-                    src="src/img/carousel3.jpg"
-                    alt="Third slide"/>
-
-                <Carousel.Caption>
-                    <h3>Third slide label</h3>
-                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                </Carousel.Caption>
-            </Carousel.Item>
-        </Carousel>
-          <div className="container">
-          <div className="row">
-            {
-              tea.map((a,i)=>{
-                return <Product key={a+i} tea={tea[i]} i={i}/>
-              })
-            }
-          </div>
-        </div>
-                
-            {
-              more === true
-              ? (
-                <Button variant="outline-dark" className="morePouBtn" onClick={()=>{
-                  axios.get('https://raw.githubusercontent.com/yunjin-kim/yunjin-kim/main/data2.json')
-                  .then((more)=>{
-                    setTea([...tea, ...more.data])
+                    <Carousel.Caption>
+                        <h3>Third slide label</h3>
+                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                    </Carousel.Caption>
+                </Carousel.Item>
+            </Carousel>
+             
+              <div className="container">
+              <div className="row">
+                {
+                  tea.map((a,i)=>{
+                    return <Product key={a+i} tea={tea[i]} i={i}/>
                   })
-                  .catch(console.log)
-                }}>
-                인기 상품 더보기
-                </Button>
-              )
-              : null
-            }
-          
-            <Nav className="mt-5" variant="tabs" defaultActiveKey="link-0">
-              <Nav.Item>
-                <Nav.Link eventKey="link-0" onClick={()=>{setPushTab(0); setSwitchEvent(false);}}>Option1</Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link eventKey="link-1" onClick={()=>{setPushTab(1); setSwitchEvent(false);}}>Option2</Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link eventKey="link-2" onClick={()=>{setPushTab(2); setSwitchEvent(false);}}>Option3</Nav.Link>
-              </Nav.Item>
-            </Nav>
+                }
+              </div>
+            </div>
+                    
+                {
+                  more === true
+                  ? (
+                    <Button variant="outline-dark" className="morePouBtn" onClick={()=>{
+                      axios.get('https://raw.githubusercontent.com/yunjin-kim/yunjin-kim/main/data2.json')
+                      .then((more)=>{
+                        setTea([...tea, ...more.data])
+                      })
+                      .catch(console.log)
+                    }}>
+                    인기 상품 더보기
+                    </Button>
+                  )
+                  : null
+                }
+              
+                <Nav className="mt-5" variant="tabs" defaultActiveKey="link-0">
+                  <Nav.Item>
+                    <Nav.Link eventKey="link-0" onClick={()=>{setPushTab(0); setSwitchEvent(false);}}>Option1</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link eventKey="link-1" onClick={()=>{setPushTab(1); setSwitchEvent(false);}}>Option2</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link eventKey="link-2" onClick={()=>{setPushTab(2); setSwitchEvent(false);}}>Option3</Nav.Link>
+                  </Nav.Item>
+                </Nav>
 
-          <CSSTransition in={switchEvent} classNames="trans" timeout={1000}>
-            <TabContent pushTab={pushTab} setSwitchEvent={setSwitchEvent} />
-          </CSSTransition>
-          
-        </Route>
+              <CSSTransition in={switchEvent} classNames="trans" timeout={1000}>
+                <TabContent pushTab={pushTab} setSwitchEvent={setSwitchEvent} />
+              </CSSTransition>
 
-        <Route path="/teashop">
-          <BarComponent></BarComponent>
-        </Route>
+              <Cart></Cart>
+              
+            </Route>
 
-        <Route path="/cart">
-            <Cart></Cart>
-        </Route>
+            <Route path="/cartpage">
 
+              <Carousel>
+                <Carousel.Item>
+                    <img
+                        className="d-block w-100"
+                        src="src/img/carousel1.jpg"
+                        alt="First slide"/>
+                    <Carousel.Caption>
+                        <h3>First slide label</h3>
+                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item>
+                    <img
+                        className="d-block w-100"
+                        src="src/img/carousel2.jpg"
+                        alt="Second slide"/>
 
-        </Switch>
-        
-        <div className="onlyToday">
+                    <Carousel.Caption>
+                        <h3>Second slide label</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item>
+                    <img
+                        className="d-block w-100"
+                        src="src/img/carousel3.jpg"
+                        alt="Third slide"/>
 
+                    <Carousel.Caption>
+                        <h3>Third slide label</h3>
+                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                    </Carousel.Caption>
+                </Carousel.Item>
+            </Carousel>
+             
+            </Route>
+
+            <Route path="/teashop" >
+              <BarComponent></BarComponent>
+            </Route>
+
+            </Switch>
+            
+            <div className="onlyToday">
+
+            </div>
         </div>
-
-        
-
-       
-    </div>
-  </>
+      </>
     )
 }
 
